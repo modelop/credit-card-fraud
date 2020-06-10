@@ -65,7 +65,7 @@ def train(train_df):
 
 
     model = Pipeline(steps=[('preprocessor', preprocessor),
-                          ('classifier', RandomForestClassifier(max_depth=3))])
+                          ('classifier', RandomForestClassifier(max_depth=30))])
 
     model.fit(X_train, y_train)
 
@@ -111,6 +111,6 @@ if __name__ == "__main__":
     train(train_df)
     begin()
 
-    for me in metrics(train_df):
+    for me in _metrics(train_df):
         print(me)
 
