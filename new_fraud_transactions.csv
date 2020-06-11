@@ -1,0 +1,14 @@
+transaction_id,card_id,customer_id,customer_zipcode,merchant_id,merchant_name,merchant_category,merchant_zipcode,merchant_country,transaction_amount,authorization_response_code,atm_network_xid,cvv_2_response_xflg,fraud_label
+885759,9106,1068,72980,5648,"Medina, Garza and Barker",7777,24801,GB,12,D,D,N,1
+212409,9132,1083,45303,1760,Short and Sons,1011,78804,GB,1490,C,B,M,1
+799637,9034,1070,45790,5204,Gill Group,7777,37214,GB,1128,A,C,N,1
+340748,9062,1006,62154,2674,"Ingram, Riley and Hunt",7777,63200,GB,2254,B,D,N,1
+420449,9192,1089,81733,4650,Buck-Rodriguez,7777,35463,GB,1328,D,B,N,1
+958329,9018,1035,63130,4893,Garcia Group,7777,94174,GB,1268,C,B,M,1
+633567,9094,1112,57560,5955,"Gallagher, Hicks and Harper",7777,12433,GB,11,C,A,N,1
+976638,9142,1049,56112,3729,Williams-Gill,7777,80554,GB,823,B,B,M,1
+256090,9110,1191,93414,9078,Cardenas Inc,7777,27989,GB,108,C,B,M,1
+817599,9004,1062,48607,4647,Johnson Inc,1011,48037,GB,908,A,D,P,1
+631276,9124,1169,96499,6639,Perez Inc,1011,42578,GB,885,C,A,P,1
+765593,9200,1172,80798,9301,Gonzalez-Lowe,1011,28051,GB,2190,B,C,M,1
+
