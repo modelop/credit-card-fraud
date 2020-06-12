@@ -32,7 +32,7 @@ class GetDistance(BaseEstimator, TransformerMixin):
 
 def begin():
     global model
-    model = pickle.load(open('model.pkl', 'rb'))
+    #model = pickle.load(open('model.pkl', 'rb'))
 
 
 
