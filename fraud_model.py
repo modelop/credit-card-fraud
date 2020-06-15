@@ -21,12 +21,16 @@ def train(traind_df):
 
 
 def metrics(df):
-    yield {"ACCURACY": .76, "AUC": .98}
+    yield {"TPR": .50, "FPR": .75}
 
 
 def predict(X):
     for row in X:
         yield 0
+
+
+
+
 
 
 class GetDistance(BaseEstimator, TransformerMixin):
