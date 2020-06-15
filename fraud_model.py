@@ -12,6 +12,23 @@ import pickle
 
 
 
+def begin():
+    pass
+
+
+def train(traind_df):
+    pass
+
+
+def metrics(df):
+    yield {"ACCURACY": .76, "AUC": .98}
+
+
+def predict(X):
+    for row in X:
+        yield 0
+
+
 class GetDistance(BaseEstimator, TransformerMixin):
     # Class Constructor
 
@@ -30,13 +47,14 @@ class GetDistance(BaseEstimator, TransformerMixin):
         return X.values
 
 
-def begin():
+
+
+def _begin():
     global model
-    #model = pickle.load(open('model.pkl', 'rb'))
+    model = pickle.load(open('model.pkl', 'rb'))
 
 
-
-def train(train_df):
+def _train(train_df):
 
     X_train = train_df.drop('fraud_label', axis=1)
     y_train = train_df['fraud_label']
@@ -69,12 +87,9 @@ def train(train_df):
 
     model.fit(X_train, y_train)
 
-    #where do we write this?? s3?  fixed location on contaier?  or get location from env variable?
     pickle.dump(model, open('model.pkl', 'wb'))
 
 
-def metrics(df):
-    yield {"ACCURACY": .76, "AUC": .98}
 
 def _metrics(df):
 
@@ -90,27 +105,10 @@ def _metrics(df):
     yield { "ACCURACY": accuracy, "AUC": auc_score}
 
 
-def predict(X):
-    for row in X:
-        yield 0
-
 
 def _predict(X):
     df = pd.DataFrame(X, index=[0])
     y_pred = model.predict(df)
     for p in y_pred:
         yield p
-
-
-
-if __name__ == "__main__":
-    train_df = pd.read_csv('transactions.csv')
-    #test_df = pd.read_csv('test.csv')
-    #pred_df = pd.read_csv('predict.csv')
-
-    train(train_df)
-    begin()
-
-    for me in _metrics(train_df):
-        print(me)
 
