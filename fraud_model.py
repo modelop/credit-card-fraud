@@ -11,19 +11,22 @@ from sklearn.metrics import accuracy_score, auc, roc_curve
 import pickle
 
 
-
+# modelop.init
 def begin():
     pass
 
 
+# modelop.train
 def train(traind_df):
     pass
 
 
+# modelop.metrics
 def metrics(df):
     yield {"TPR": .50, "FPR": .75}
 
 
+# modelop.score
 def predict(X):
     for row in X:
         yield 0
