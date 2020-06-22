@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_1le7rug" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.3">
+  <decision id="backtest" name="backtest">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="tpr" camunda:inputVariable="tpr">
+        <inputExpression id="inputExpression_1" typeRef="double">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="retrain" name="retrain" typeRef="boolean" />
+      <rule id="DecisionRule_07sa9fu">
+        <inputEntry id="UnaryTests_0j5c2kc">
+          <text>&gt;=0.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vzvrvp">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_02c94is">
+        <inputEntry id="UnaryTests_1iw7imz">
+          <text>&lt;0.5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1rp7mjx">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

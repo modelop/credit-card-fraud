@@ -23,7 +23,7 @@ def train(traind_df):
 
 # modelop.metrics
 def metrics(df):
-    yield {"TPR": .50, "FPR": .75}
+    yield {"tpr": .50, "fpr": .75}
 
 
 # modelop.score
