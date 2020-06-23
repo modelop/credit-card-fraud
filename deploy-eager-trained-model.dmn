@@ -20,7 +20,7 @@
           <text>true</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_092l27t">
-          <text>TPR greater than threshold</text>
+          <text>"TPR greater than threshold"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_02c94is">
@@ -31,7 +31,7 @@
           <text>false</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_0wzwp1q">
-          <text>TPR less than threshold</text>
+          <text>"TPR less than threshold"</text>
         </outputEntry>
       </rule>
     </decisionTable>
