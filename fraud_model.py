@@ -135,7 +135,7 @@ def _kpi_metrics(df):
     lift = df.iloc[pred==1]
     lift = lift.loc[(lift['fraud_label']==1) & (lift['rules_engine_prediction'] == 0)]['transaction_amount'].sum()
 
-    return {"tpr": tpr, "fpr": fpr, "dollar_value_lift": lift, "false_positives_added": fp}
+    yield {"tpr": tpr, "fpr": fpr, "dollar_value_lift": lift, "false_positives_added": fp}
 
 
 
@@ -146,9 +146,4 @@ def _predict(X):
     for p in y_pred:
         yield p
 
-
-_begin()
-
-df = pd.read_csv('transactions_with_rules_engine.csv')
-_kpi_metrics(df)
 
