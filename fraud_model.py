@@ -5,7 +5,8 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.metrics import accuracy_score, auc, roc_curve
+from sklearn.metrics import accuracy_score, auc, roc_curve, confusion_matrix
+
 
 
 import pickle
@@ -99,17 +100,43 @@ def _train(train_df):
 
 
 def _metrics(df):
+    X_test = df.drop('fraud_label', axis=1)
+    y_test = df['fraud_label']
+    X_test = X_test.drop(['transaction_id', 'card_id', 'customer_id', 'merchant_id', 'merchant_name'],
+                         axis=1)  # no predictive value in these fields
+
+    pred = model.predict(X_test)
+    tn, fp, fn, tp = confusion_matrix(y_test, pred).ravel()
+    num_pos = df[df['fraud_label'] == 1]['fraud_label'].count()
+    tpr = tp / num_pos
+
+    num_neg = df[df['fraud_label'] == 0]['fraud_label'].count()
+
+    fpr = fp / num_neg
+    yield  {"tpr": tpr, "fpr": fpr}
+
+
+def _kpi_metrics(df):
 
     X_test = df.drop('fraud_label', axis=1)
     y_test = df['fraud_label']
     X_test = X_test.drop(['transaction_id', 'card_id', 'customer_id', 'merchant_id', 'merchant_name'],
-                           axis=1)  # no predictive value in these fields
+                         axis=1)  # no predictive value in these fields
 
     pred = model.predict(X_test)
-    accuracy = accuracy_score(y_test, pred)
-    fpr, tpr, thresholds = roc_curve(y_test, pred)
-    auc_score = auc(fpr, tpr)
-    yield { "ACCURACY": accuracy, "AUC": auc_score}
+    tn, fp, fn, tp = confusion_matrix(y_test, pred).ravel()
+    num_pos = df[df['fraud_label']==1]['fraud_label'].count()
+    tpr = tp / num_pos
+
+    num_neg = df[df['fraud_label']==0]['fraud_label'].count()
+
+    fpr = fp / num_neg
+
+    lift = df.iloc[pred==1]
+    lift = lift.loc[(lift['fraud_label']==1) & (lift['rules_engine_prediction'] == 0)]['transaction_amount'].sum()
+
+    return {"tpr": tpr, "fpr": fpr, "dollar_value_lift": lift, "false_positives_added": fp}
+
 
 
 
@@ -118,4 +145,10 @@ def _predict(X):
     y_pred = model.predict(df)
     for p in y_pred:
         yield p
+
+
+_begin()
+
+df = pd.read_csv('transactions_with_rules_engine.csv')
+_kpi_metrics(df)
 
