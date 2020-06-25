@@ -11,22 +11,22 @@ from sklearn.metrics import accuracy_score, auc, roc_curve
 import pickle
 
 
-# modelop.init
+# fastscore.init
 def begin():
     pass
 
 
-# modelop.train
+# fastscore.train
 def train(traind_df):
     pass
 
 
-# modelop.metrics
+# fastscore.metrics
 def metrics(df):
     yield {"tpr": .50, "fpr": .75}
 
 
-# modelop.score
+# fastscore.score
 def predict(X):
     for row in X:
         yield 0
